@@ -10,6 +10,7 @@ class TestLogin:
             USER_CREDENTIALS["username"]["standard_user"], 
             USER_CREDENTIALS["password"]["secret_sauce"]
         )
+        print('Login realizado correctamente...!!')
         
     # Prueba para el login con usuario bloqueado
     def test_locked_user(self, driver:webdriver.Remote):
@@ -19,7 +20,9 @@ class TestLogin:
             USER_CREDENTIALS["password"]["secret_sauce"]
         )
         error_message = login_page.obtener_mensaje_error()
-        assert "Epic sadface: Sorry, this user has been locked out." in error_message
+        expect_message = "Epic sadface: Sorry, this user has been locked out."
+        assert expect_message in error_message
+        print(f'Mensaje de error es el esperado => {expect_message}')
         
     # Prueba para el login con credenciales incorrectas
     def test_credentials_error(self, driver:webdriver.Remote):
@@ -29,4 +32,6 @@ class TestLogin:
             USER_CREDENTIALS["password"]["failed_password"]
         )
         error_message = login_page.obtener_mensaje_error()
-        assert "Epic sadface: Username and password do not match any user in this service" in error_message
+        expect_message = "Epic sadface: Username and password do not match any user in this service"
+        assert expect_message in error_message
+        print(f'Mensaje de error es el esperado => {expect_message}')
