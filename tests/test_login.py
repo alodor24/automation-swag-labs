@@ -1,20 +1,29 @@
-from utils.consts import USER_CREDENTIALS, PAGES
-from utils.navigate_to_page import navigate_to_page
+from pages.inventory_page import InventoryPage
+from pages.login_page import LoginPage
+from utils.consts import USER_CREDENTIALS
 from selenium import webdriver
 
 class TestLogin:
     # Prueba para el login con usuario estándar
     def test_login(self, driver:webdriver.Remote):
-        login_page = navigate_to_page(driver, PAGES["login_page"])
+        driver.get("https://www.saucedemo.com/")
+        login_page = LoginPage(driver)
         login_page.login_completo(
             USER_CREDENTIALS["username"]["standard_user"], 
             USER_CREDENTIALS["password"]["secret_sauce"]
         )
+        
         print('Login realizado correctamente...!!')
+        
+        driver.get("https://www.saucedemo.com/inventory.html")
+        inventory_page = InventoryPage(driver)
+        expect_message = inventory_page.get_title_page()
+        print(f'Título de la página de inventario de productos => {expect_message}')
         
     # Prueba para el login con usuario bloqueado
     def test_locked_user(self, driver:webdriver.Remote):
-        login_page = navigate_to_page(driver, PAGES["login_page"])
+        driver.get("https://www.saucedemo.com/")
+        login_page = LoginPage(driver)
         login_page.login_completo(
             USER_CREDENTIALS["username"]["locked_out_user"], 
             USER_CREDENTIALS["password"]["secret_sauce"]
@@ -26,7 +35,8 @@ class TestLogin:
         
     # Prueba para el login con credenciales incorrectas
     def test_credentials_error(self, driver:webdriver.Remote):
-        login_page = navigate_to_page(driver, PAGES["login_page"])
+        driver.get("https://www.saucedemo.com/")
+        login_page = LoginPage(driver)
         login_page.login_completo(
             USER_CREDENTIALS["username"]["malicious_user"], 
             USER_CREDENTIALS["password"]["failed_password"]
