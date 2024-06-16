@@ -8,12 +8,13 @@ class TestLogin:
     def test_login(self, driver:webdriver.Remote):
         driver.get(URL_PATH)
         login_page = LoginPage(driver)
-        login_page.login_completo(
+        login_page.to_do_login(
             USER_CREDENTIALS["username"]["standard_user"], 
             USER_CREDENTIALS["password"]["secret_sauce"]
         )
         print('Login realizado correctamente...!!')
         
+        # Navegar a la página de inventario y obtener el título
         driver.get(f'{URL_PATH}/inventory.html')
         inventory_page = InventoryPage(driver)
         expect_message = inventory_page.get_title_page()
@@ -23,11 +24,11 @@ class TestLogin:
     def test_locked_user(self, driver:webdriver.Remote):
         driver.get(URL_PATH)
         login_page = LoginPage(driver)
-        login_page.login_completo(
+        login_page.to_do_login(
             USER_CREDENTIALS["username"]["locked_out_user"], 
             USER_CREDENTIALS["password"]["secret_sauce"]
         )
-        error_message = login_page.obtener_mensaje_error()
+        error_message = login_page.get_error_message()
         expect_message = "Epic sadface: Sorry, this user has been locked out."
         assert expect_message in error_message
         print(f'Mensaje de error es el esperado => {expect_message}')
@@ -36,11 +37,11 @@ class TestLogin:
     def test_credentials_error(self, driver:webdriver.Remote):
         driver.get(URL_PATH)
         login_page = LoginPage(driver)
-        login_page.login_completo(
+        login_page.to_do_login(
             USER_CREDENTIALS["username"]["malicious_user"], 
             USER_CREDENTIALS["password"]["failed_password"]
         )
-        error_message = login_page.obtener_mensaje_error()
+        error_message = login_page.get_error_message()
         expect_message = "Epic sadface: Username and password do not match any user in this service"
         assert expect_message in error_message
         print(f'Mensaje de error es el esperado => {expect_message}')
