@@ -3,19 +3,15 @@ from selenium.webdriver.common.by import By
 
 class InventoryPage:
   """
-  Clase que contiene los elementos de la página de login
+  Clase que contiene los elementos de la página de inventario
   """
   
   def __init__(self, driver: webdriver.Remote):
-        self.driver = driver
+    self.driver = driver
         
   @property
   def __titlePage(self):
     return self.driver.find_element(By.CLASS_NAME, "title")
-  
-  @property
-  def __inventory_list(self):
-    return self.driver.find_element(By.CLASS_NAME, 'inventory_list')
   
   @property
   def __inventory_items(self):
