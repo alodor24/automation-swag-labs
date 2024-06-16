@@ -21,5 +21,9 @@ class TestInventory:
     
     # Comprobar si existen productos
     products = inventory_page.exist_some_inventory_item()
-    assert products > 0, 'No existen productos para interactuar'
-    print(f'La cantidad de productos visibles es: {products}')
+    
+    if (products > 0):
+      print(f'La cantidad de productos visibles es: {products}')
+    else:
+      raise Exception('No existen productos para interactuar')
+    
