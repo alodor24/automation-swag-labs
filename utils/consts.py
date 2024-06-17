@@ -22,3 +22,8 @@ ERROR_MESSAGE = {
   "expect_message_user_locked": "Epic sadface: Sorry, this user has been locked out.",
   "expect_message_user_do_not_match": "Epic sadface: Username and password do not match any user in this service"
 }
+
+MODE_CLICK_PRODUCT = {
+  "title": "title",
+  "image": "image"
+}
