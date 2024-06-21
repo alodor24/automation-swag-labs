@@ -24,6 +24,7 @@ class LoginPage:
     def __h3_errorMessage(self):
         return self.driver.find_element(By.XPATH, "//div[@class='error-message-container error']//h3")
     
+    
     def to_do_login(self, username, password):
         """
         Método que se encarga de realizar el login completo
@@ -35,6 +36,7 @@ class LoginPage:
         self.__input_password.send_keys(password)
         self.__button_login.click()
         
+    
     def get_error_message(self):
         """
         Método que se encarga de obtener el mensaje de error
