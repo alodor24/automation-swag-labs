@@ -18,13 +18,22 @@ class InventoryPage:
   def __inventory_items(self):
     return self.driver.find_elements(By.CLASS_NAME, 'inventory_item')
   
-  @property
-  def __a_link_item(self):
-    return self.driver.find_element(By.CSS_SELECTOR, '.inventory_item:nth-child(2) .inventory_item_label > a')
   
-  @property
-  def __img_link_item(self):
-    return self.driver.find_element(By.CSS_SELECTOR, '.inventory_item .inventory_item_img > a')
+  def __a_link_item(self, element):
+    return element.find_element(By.CSS_SELECTOR, '.inventory_item_label > a')
+  
+  
+  def __img_link_item(self, element):
+    return element.find_element(By.CSS_SELECTOR, '.inventory_item_img > a')
+
+  
+  def __button_add_to_cart(self, element):
+    return element.find_element(By.CSS_SELECTOR, '.btn.btn_primary.btn_inventory')
+  
+  
+  def __button_remove_from_cart(self, element):
+    return self.__inventory_items.find_element(By.CSS_SELECTOR, '.btn.btn_secondary.btn_inventory')
+  
   
   def get_title_page(self):
     """
@@ -33,6 +42,7 @@ class InventoryPage:
     """
     return self.__titlePage.text
   
+  
   def exist_some_inventory_item(self):
     """
     Método que se encarga de contabilizar los productos encontrados
@@ -40,13 +50,30 @@ class InventoryPage:
     """
     return len(self.__inventory_items)
   
-  def handle_click_on_product(self, mode: str):
+  
+  def handle_click_on_product(self, mode: str, index: int):
     """
     Método que se encarga de hacer click sobre el producto
     Args:
-    mode: usado para condicionar la forma para seleccionar
+    mode: usado para condicionar la forma de selección
+    index: hace referencia al item a seleccionar
     """
+    products = self.__inventory_items
+    product_selected = products[index]
+    
     if (mode == MODE_CLICK_PRODUCT["title"]):
-      self.__a_link_item.click()
+      self.__a_link_item(product_selected).click()
     else:
-      self.__img_link_item.click()
+      self.__img_link_item(product_selected).click()
+      
+      
+  def handle_click_add_to_cart(self, index: int):
+    """
+    Método que se encarga de agregar un producto al carrito
+    Args:
+    index: usado para seleccionar el elemento por su indice
+    """
+    products = self.__inventory_items
+    product_selected = products[index]
+    
+    self.__button_add_to_cart(product_selected).click()

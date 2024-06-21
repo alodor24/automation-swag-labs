@@ -40,12 +40,12 @@ class TestInventory:
     
   # Prueba para seleccionar un producto desde el titulo
   def test_handle_click_title_product(self, driver: webdriver.Remote):
-    click_on_product(driver, MODE_CLICK_PRODUCT["title"])
+    click_on_product(driver, MODE_CLICK_PRODUCT["title"], 3)
     
     
   # Prueba para seleccionar un producto desde la imagen
   def test_handle_click_image_product(self, driver: webdriver.Remote):
-    click_on_product(driver, MODE_CLICK_PRODUCT["image"])
+    click_on_product(driver, MODE_CLICK_PRODUCT["image"], 2)
     
     
   # Prueba para agregar un producto al carrito
