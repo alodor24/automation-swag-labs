@@ -40,4 +40,9 @@ class LoginPage:
         Método que se encarga de obtener el mensaje de error
         Return: mensaje de error
         """
-        return self.__h3_errorMessage.text
+        error_element = self.__h3_errorMessage
+        
+        if (error_element):
+            return error_element.text
+            
+        return None
