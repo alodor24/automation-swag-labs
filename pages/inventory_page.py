@@ -18,6 +18,10 @@ class InventoryPage:
   def __inventory_items(self):
     return self.driver.find_elements(By.CLASS_NAME, 'inventory_item')
   
+  @property
+  def __shopping_cart_badge(self):
+    return self.driver.find_element(By.CSS_SELECTOR, '.shopping_cart_link .shopping_cart_badge')
+  
   
   def __a_link_item(self, element):
     return element.find_element(By.CSS_SELECTOR, '.inventory_item_label > a')
@@ -77,3 +81,14 @@ class InventoryPage:
     product_selected = products[index]
     
     self.__button_add_to_cart(product_selected).click()
+    
+    
+  def get_quantity_added_to_cart(self):
+    """
+    Método que se encarga de devolver la cantidad de productos existentes en el carrito
+    Return: cantidad de productos
+    """
+    element = self.__shopping_cart_badge
+    
+    if (element):
+      return int(element.text)

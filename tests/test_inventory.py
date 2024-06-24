@@ -48,14 +48,26 @@ class TestInventory:
     click_on_product(driver, MODE_CLICK_PRODUCT["image"], 2)
     
     
-  # Prueba para agregar un producto al carrito
+  # Prueba para agregar uno o más producto al carrito
   def test_handle_click_add_to_cart(self, driver: webdriver.Remote):
-    login(
+    isLoginSuccess = login(
       driver, 
       USER_CREDENTIALS["username"]["standard_user"], 
       USER_CREDENTIALS["password"]["secret_sauce"]
     )
     
-    driver.get(f'{URL_PATH}/inventory.html')
-    inventory_page = InventoryPage(driver)
-    inventory_page.handle_click_add_to_cart(3)
+    if (isLoginSuccess):
+      driver.get(f'{URL_PATH}/inventory.html')
+      inventory_page = InventoryPage(driver)
+      inventory_page.handle_click_add_to_cart(3)
+      inventory_page.handle_click_add_to_cart(1)
+      
+      try:
+        items = inventory_page.get_quantity_added_to_cart()
+        
+        if (items):
+          output = f'Fueron añadidos al carrito {items} productos' if items > 1 else f'Fue añadido al carrito {items} producto'
+          print(output)
+        
+      except:
+        print('No fue seleccionado algún producto')
