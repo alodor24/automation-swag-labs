@@ -1,16 +1,12 @@
 from selenium import webdriver
-from utils.consts import URL_PATH, USER_CREDENTIALS
+from utils.consts import STANDARD_USER, URL_PATH
 from utils.login import login
 from pages.logout_page import LogoutPage
 
 class TestLogout:
   # Prueba para realizar el logout
   def test_logout(self, driver: webdriver.Remote):
-    isLoginSuccess = login(
-      driver, 
-      USER_CREDENTIALS["username"]["standard_user"], 
-      USER_CREDENTIALS["password"]["secret_sauce"]
-    )
+    isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
       driver.get(f'{URL_PATH}/inventory.html')

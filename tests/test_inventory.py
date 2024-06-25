@@ -1,16 +1,12 @@
 from pages.inventory_page import InventoryPage
 from utils.login import login
 from utils.click_on_product import click_on_product
-from utils.consts import USER_CREDENTIALS, URL_PATH, MODE_CLICK_PRODUCT
+from utils.consts import STANDARD_USER, URL_PATH, MODE_CLICK_PRODUCT
 from selenium import webdriver
 class TestInventory:
   # Prueba para comprobar si se encuentra en la página de inventario
   def test_is_inventory_page(self, driver: webdriver.Remote):
-    isLoginSuccess = login(
-      driver, 
-      USER_CREDENTIALS["username"]["standard_user"], 
-      USER_CREDENTIALS["password"]["secret_sauce"]
-    )
+    isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
       driver.get(f'{URL_PATH}/inventory.html')
@@ -21,11 +17,7 @@ class TestInventory:
   
   # Prueba para comprobar si existen productos
   def test_exist_some_product(self, driver: webdriver.Remote):
-    isLoginSuccess = login(
-      driver, 
-      USER_CREDENTIALS["username"]["standard_user"], 
-      USER_CREDENTIALS["password"]["secret_sauce"]
-    )
+    isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
       driver.get(f'{URL_PATH}/inventory.html')
@@ -50,11 +42,7 @@ class TestInventory:
     
   # Prueba para agregar uno o más producto al carrito
   def test_handle_click_add_to_cart(self, driver: webdriver.Remote):
-    isLoginSuccess = login(
-      driver, 
-      USER_CREDENTIALS["username"]["standard_user"], 
-      USER_CREDENTIALS["password"]["secret_sauce"]
-    )
+    isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
       driver.get(f'{URL_PATH}/inventory.html')
@@ -75,11 +63,7 @@ class TestInventory:
         
   # Prueba para remover uno o más producto del carrito
   def test_handle_click_remove_from_cart(self, driver: webdriver.Remote):
-    isLoginSuccess = login(
-      driver, 
-      USER_CREDENTIALS["username"]["standard_user"], 
-      USER_CREDENTIALS["password"]["secret_sauce"]
-    )
+    isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
       driver.get(f'{URL_PATH}/inventory.html')
