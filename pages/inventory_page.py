@@ -36,7 +36,7 @@ class InventoryPage:
   
   
   def __button_remove_from_cart(self, element):
-    return self.__inventory_items.find_element(By.CSS_SELECTOR, '.btn.btn_secondary.btn_inventory')
+    return element.find_element(By.CSS_SELECTOR, '.btn.btn_secondary.btn_inventory')
   
   
   def get_title_page(self):
@@ -92,3 +92,15 @@ class InventoryPage:
     
     if (element):
       return int(element.text)
+    
+    
+  def handle_click_remove_from_cart(self, index: int):
+    """
+    Método que se encarga de remover un producto del carrito
+    Args:
+    index: usado para seleccionar el elemento por su indice
+    """
+    products = self.__inventory_items
+    product_selected = products[index]
+    
+    self.__button_remove_from_cart(product_selected).click()

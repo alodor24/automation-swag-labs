@@ -71,3 +71,38 @@ class TestInventory:
         
       except:
         print('No fue seleccionado algún producto')
+        
+        
+  # Prueba para remover uno o más producto del carrito
+  def test_handle_click_remove_from_cart(self, driver: webdriver.Remote):
+    isLoginSuccess = login(
+      driver, 
+      USER_CREDENTIALS["username"]["standard_user"], 
+      USER_CREDENTIALS["password"]["secret_sauce"]
+    )
+    
+    if (isLoginSuccess):
+      driver.get(f'{URL_PATH}/inventory.html')
+      inventory_page = InventoryPage(driver)
+      
+      # Agrega los siguientes productos al carrito
+      inventory_page.handle_click_add_to_cart(3)
+      inventory_page.handle_click_add_to_cart(1)
+      
+      # Verifica que la cantidad de productos agregados es correcta
+      items_before = inventory_page.get_quantity_added_to_cart()
+      print(f'Cantidad de productos en el carrito antes de remover: {items_before}')
+      
+      # Indica el o los productos a remover del carrito
+      inventory_page.handle_click_remove_from_cart(1)
+      
+      try:
+        # Verifica nuevamente la cantidad de productos existentes en el carrito
+        items_after = inventory_page.get_quantity_added_to_cart()
+        
+        if (items_after):
+          print(f'Cantidad de productos existen en el carrito luego: {items_after}')
+        
+      except:
+        print('El carrito se encuentra vacío')
+      
