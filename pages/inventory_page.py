@@ -19,6 +19,10 @@ class InventoryPage:
     return self.driver.find_elements(By.CLASS_NAME, 'inventory_item')
   
   @property
+  def __shopping_cart_btn(self):
+    return self.driver.find_element(By.CLASS_NAME, 'shopping_cart_link')
+  
+  @property
   def __shopping_cart_badge(self):
     return self.driver.find_element(By.CSS_SELECTOR, '.shopping_cart_link .shopping_cart_badge')
   
@@ -104,3 +108,10 @@ class InventoryPage:
     product_selected = products[index]
     
     self.__button_remove_from_cart(product_selected).click()
+    
+    
+  def handle_click_on_shopping_cart(self):
+    """
+    Método que se encarga de hacer click sobre el botón del carito de compras
+    """
+    self.__shopping_cart_btn.click()
