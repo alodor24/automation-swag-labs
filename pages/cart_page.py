@@ -9,6 +9,10 @@ class CartPage:
       self.driver = driver
       
   @property
+  def __titlePage(self):
+    return self.driver.find_element(By.CLASS_NAME, 'title')
+      
+  @property
   def __continue_shopping_btn(self):
     return self.driver.find_element(By.ID, 'continue-shopping')
   
@@ -29,3 +33,11 @@ class CartPage:
     Método que se encarga de hacer click sobre el botón checkout
     """
     self.__checkout_btn.click()
+    
+    
+  def get_title_page(self):
+    """
+    Método que se encarga de obtener el título de la página
+    Return: título de la página
+    """
+    return self.__titlePage.text
