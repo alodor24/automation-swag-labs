@@ -2,6 +2,8 @@ from selenium import webdriver
 from utils.consts import STANDARD_USER, URL_PATH
 from utils.login import login
 from pages.logout_page import LogoutPage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class TestLogout:
   # Prueba para realizar el logout
@@ -9,7 +11,7 @@ class TestLogout:
     isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       logout_page = LogoutPage(driver)
       logout_page.handle_click_on_burger_btn()
       logout_page.handle_click_on_logout_sidebar_link()

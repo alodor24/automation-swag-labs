@@ -3,13 +3,16 @@ from utils.login import login
 from utils.click_on_product import click_on_product
 from utils.consts import STANDARD_USER, URL_PATH, MODE_CLICK_PRODUCT
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 class TestInventory:
   # Prueba para comprobar si se encuentra en la página de inventario
   def test_is_inventory_page(self, driver: webdriver.Remote):
     isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       inventory_page = InventoryPage(driver)
       title_page = inventory_page.get_title_page()
       print(f'El título de la página es: {title_page}')
@@ -20,7 +23,7 @@ class TestInventory:
     isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       inventory_page = InventoryPage(driver)
       products = inventory_page.exist_some_inventory_item()
     
@@ -45,7 +48,7 @@ class TestInventory:
     isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       inventory_page = InventoryPage(driver)
       inventory_page.handle_click_add_to_cart(3)
       inventory_page.handle_click_add_to_cart(1)
@@ -66,7 +69,7 @@ class TestInventory:
     isLoginSuccess = login(driver, STANDARD_USER)
     
     if (isLoginSuccess):
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       inventory_page = InventoryPage(driver)
       
       # Agrega los siguientes productos al carrito

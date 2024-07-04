@@ -15,7 +15,7 @@ def click_on_product(driver: webdriver.Remote, mode: str, index: int):
   isLoginSuccess = login(driver, STANDARD_USER)
   
   if (isLoginSuccess):
-    driver.get(f'{URL_PATH}/inventory.html')
+    WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
     inventory_page = InventoryPage(driver)
     current_url = driver.current_url
     print(f'La url de la página de invetario es: {current_url}')

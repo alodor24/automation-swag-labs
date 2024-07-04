@@ -13,12 +13,12 @@ class TestCart:
     
     if (isLoginSuccess):
       # Ingresa a la página de inventario de productos y hace click en el carrito de compras
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       inventory_page = InventoryPage(driver)
       inventory_page.handle_click_on_shopping_cart()
       
       # Redirige a la página del carrito y hace click en el botón continue shopping
-      driver.get(f'{URL_PATH}/cart.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/cart.html'))
       cart_page = CartPage(driver)
       cart_page.handle_click_on_continue_shopping()
       
@@ -35,12 +35,12 @@ class TestCart:
     
     if (isLoginSuccess):
       # Ingresa a la página de inventario de productos y hace click en el carrito de compras
-      driver.get(f'{URL_PATH}/inventory.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
       inventory_page = InventoryPage(driver)
       inventory_page.handle_click_on_shopping_cart()
       
       # Redirige a la página del carrito y hace click en el botón Checkout
-      driver.get(f'{URL_PATH}/cart.html')
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/cart.html'))
       cart_page = CartPage(driver)
       cart_page.handle_click_on_checkout()
       
