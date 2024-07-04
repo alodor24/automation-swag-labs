@@ -25,7 +25,7 @@ class LoginPage:
         return self.driver.find_element(By.XPATH, "//div[@class='error-message-container error']//h3")
     
     
-    def to_do_login(self, username, password):
+    def to_do_login(self, username: str, password: str):
         """
         Método que se encarga de realizar el login completo
         Args:

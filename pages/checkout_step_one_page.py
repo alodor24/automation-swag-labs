@@ -37,7 +37,7 @@ class CheckoutStepOnePage:
     self.__button_cancel.click()
   
   
-  def to_do_checkout(self, firstname, lastname, postalcode):
+  def to_do_checkout(self, firstname: str, lastname: str, postalcode: str):
     """
     Método que se encarga de realizar el checkout
     Args:
@@ -45,10 +45,29 @@ class CheckoutStepOnePage:
     lastname: apellido del cliente
     postalcode: código postal del cliente
     """
-    self.__input_first_name.send_keys(firstname)
-    self.__input_last_name.send_keys(lastname)
-    self.__input_postal_code.send_keys(postalcode)
-    self.__button_continue.click()
+    if (firstname == ''):
+      self.__input_first_name.clear()
+      self.__button_continue.click()
+      return
+      
+    elif (lastname == ''):
+      self.__input_first_name.send_keys(firstname)
+      self.__input_last_name.clear()
+      self.__button_continue.click()
+      return
+    
+    elif (postalcode == ''):
+      self.__input_first_name.send_keys(firstname)
+      self.__input_last_name.send_keys(lastname)
+      self.__input_postal_code.clear()
+      self.__button_continue.click()
+      return
+    
+    else:
+      self.__input_first_name.send_keys(firstname)
+      self.__input_last_name.send_keys(lastname)
+      self.__input_postal_code.send_keys(postalcode)
+      self.__button_continue.click()
       
   
   def get_error_message(self):
