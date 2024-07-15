@@ -26,3 +26,9 @@ MODE_CLICK_PRODUCT = {
   "title": "title",
   "image": "image"
 }
+
+FORM_DATA = {
+  "firstname": "José Alejandro",
+  "lastname": "Méndez Sánchez",
+  "postalcode": "1414"
+}

@@ -37,7 +37,7 @@ class CheckoutStepOnePage:
     self.__button_cancel.click()
   
   
-  def to_do_checkout(self, firstname: str, lastname: str, postalcode: str):
+  def to_do_checkout(self, form_data: dict):
     """
     Método que se encarga de realizar el checkout
     Args:
@@ -45,6 +45,10 @@ class CheckoutStepOnePage:
     lastname: apellido del cliente
     postalcode: código postal del cliente
     """
+    firstname = form_data.get('firstname')
+    lastname = form_data.get('lastname')
+    postalcode = form_data.get('postalcode')
+    
     if (firstname == ''):
       self.__input_first_name.clear()
       self.__button_continue.click()

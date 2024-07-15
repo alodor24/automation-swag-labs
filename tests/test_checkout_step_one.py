@@ -1,7 +1,7 @@
 from pages.cart_page import CartPage
 from pages.checkout_step_one_page import CheckoutStepOnePage
 from pages.inventory_page import InventoryPage
-from utils.consts import STANDARD_USER, URL_PATH
+from utils.consts import FORM_DATA, STANDARD_USER, URL_PATH
 from utils.login import login
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -55,7 +55,7 @@ class TestCheckoutStepOne:
       
       # Verificar la validación del formulario
       checkout_step_one_page = CheckoutStepOnePage(driver)
-      checkout_step_one_page.to_do_checkout('José Alejandro', 'Méndez', '1414')
+      checkout_step_one_page.to_do_checkout(FORM_DATA)
       
       try:
         error_message = checkout_step_one_page.get_error_message()
