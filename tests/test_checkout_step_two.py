@@ -72,3 +72,37 @@ class TestCheckoutStepTwo:
       current_url = driver.current_url
       assert current_url == f'{URL_PATH}/inventory.html'
       print(f'Realizado satisfactoriamente...!! => {current_url}')
+      
+      
+  # Prueba para comprobar el funcionamiento del botón Finish
+  def test_finish_btn(self, driver: webdriver.Remote):
+    isLoginSuccess = login(driver, STANDARD_USER)
+    
+    if (isLoginSuccess):
+      # Ingresa a la página de inventario de productos y hace click en el carrito de compras
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/inventory.html'))
+      inventory_page = InventoryPage(driver)
+      inventory_page.handle_click_on_shopping_cart()
+      
+      # Redirige a la página del carrito y hace click en el botón Checkout
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/cart.html'))
+      cart_page = CartPage(driver)
+      cart_page.handle_click_on_checkout()
+      
+      # Espera hasta ser redirigido a la primera página del proceso de compra
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/checkout-step-one.html'))
+      
+      # Carga datos en el formulario
+      checkout_step_one_page = CheckoutStepOnePage(driver)
+      checkout_step_one_page.to_do_checkout(FORM_DATA)
+      
+      # Continua a la siguiente pantalla del proceso
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/checkout-step-two.html'))
+      checkout_step_two_page = CheckoutStepTwoPage(driver)
+      checkout_step_two_page.handle_click_on_finish()
+      
+      # Cuando se presiona el botón finish es redirigido a la página checkout complete
+      WebDriverWait(driver, 10).until(EC.url_to_be(f'{URL_PATH}/checkout-complete.html'))
+      current_url = driver.current_url
+      assert current_url == f'{URL_PATH}/checkout-complete.html'
+      print(f'Realizado satisfactoriamente...!! => {current_url}')
